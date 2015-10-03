@@ -5,7 +5,16 @@ Our awesome analysis project
 
 Run: ```python2 www/manage.py runserver```
 
-Then, access: [http://localhost:8000](http://localhost:8000)
+Then, access: [http://localhost:8000](http://localhost:8000
+
+### API access ###
+
+Access ```http://localhost:8000/api?query=<query>&nb_per_source=<nb>&sources=<sources>```
+
+* `query` : query string
+* `nb_per_source` : number of result to retrive for each source
+* `sources` : list of domains from which to retrieve texts separated par commas, the key word `web` can be used to request a globa lweb search
+* exampel : ```http://localhost:8000/api?query=foreigner&nb_per_source=2&sources=web,cnn.com```
 
 ## Features ##
 
