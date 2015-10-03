@@ -5,6 +5,8 @@ Tools
 
 http://www.clips.ua.ac.be/pattern
 
+SA available for English, French, ...
+
 Licence: BSD
 
 # Text extraction #
