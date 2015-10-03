@@ -24,4 +24,7 @@ VOLUME ["/app"]
 
 EXPOSE 8080
 
-ENTRYPOINT ["/usr/bin/python app/manage.py runserver"]
+RUN /usr/bin/python /app/manage.py makemigrations
+RUN /usr/bin/python /app/manage.py migrate
+
+ENTRYPOINT ["/usr/bin/python /app/manage.py runserver"] # not suitable for deployment...
