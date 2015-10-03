@@ -9,11 +9,11 @@ Given a text, compute the following statistics:
 
 * Polarity (positive<->negative)
 * Subjectivity (subjective<->objective)
-* Level of language
-* Semantic fields
 * Number of words per sentence
 * Mood: INDICATIVE, IMPERATIVE, CONDITIONAL or SUBJUNCTIVE
-* Modality: degree of certainty. According to the documentation of `Pattern`: "for example, "I wish it would stop raining" scores -0.35, whereas "It will stop raining" scores +0.75. Accuracy is about 68% for Wikipedia texts".
+* Modality: degree of certainty. According to the documentation of `Pattern`: "*for example, "I wish it would stop raining" scores -0.35, whereas "It will stop raining" scores +0.75. Accuracy is about 68% for Wikipedia texts*".
+* Semantic fields
+* Level of language/Register
 
 ### Webpage level ###
 
