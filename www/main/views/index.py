@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ipware.ip import get_ip
+#from ipware.ip import get_ip
 
 def index(request):
     print request.session.session_key
