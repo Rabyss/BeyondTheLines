@@ -14,5 +14,8 @@ RUN python setup.py install
 RUN apt-get install -y python-numpy
 RUN pip install pattern
 
+# Langdetect
+RUN pip install langdetect
+
 # Django
 RUN apt-get install -y python-django
