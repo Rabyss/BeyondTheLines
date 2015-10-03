@@ -1,6 +1,12 @@
 # HackZurich2015
 Our awesome analysis project
 
+## Running the app ##
+
+Run: ```python2 www/manage.py runserver```
+
+Then, access: [http://localhost:8000](http://localhost:8000)
+
 ## Features ##
 
 ### Text level ###
