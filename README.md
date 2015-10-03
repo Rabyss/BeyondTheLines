@@ -1,6 +1,10 @@
 # HackZurich2015
 Our awesome analysis project
 
+## Running the app ##
+
+```$ python2 www/manage.py runserver```
+
 ## Features ##
 
 ### Text level ###
