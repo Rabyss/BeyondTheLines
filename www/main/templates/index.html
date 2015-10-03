@@ -4,9 +4,11 @@
 		<meta charset="UTF-8">
 		<title>Beyond the lines</title>
 		<link href="/static/css/style.less" rel="stylesheet/less" type="text/css">
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script src="/static/js/less.min.js"></script>
 		<script src="/static/js/fetch.min.js"></script>
 		<script src="/static/js/controller.js"></script>
+		
 		<link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
 	</head>
 	<body>
@@ -103,7 +105,7 @@
 			<h2>Number of Words per Sentence</h2>
 
 			<p>The number of words per sentence can provide a measure of the <strong>complexity</strong> of a text. For example, the masterpiece <i>In Search of Lost Time</i> by French writer Marcel Proust has an average of 38 words per sentence, while that's of a children can be lower than 10.</p>
-			<div id="word-per-sentence" class="boxPlot"></div>
+			<div id="word-per-sentence"></div>
 
 			<!-- <h2>Register of Language</h2> -->
 
@@ -112,10 +114,12 @@
 			<h2>Mood</h2>
 			<p>The mood of a text is computed from the use of modality verbs and adverbs. It can be <i>indicative</i>, <i>imperative</i>, <i>conditional</i> or <i>subjunctive</i>.</p>
 
+			 <div id="mood" class="mood"></div>
+
 			<h2>Modality</h2>
 			
 			<div id="modality" class="boxPlot"></div>
-			<p>The modality of a sentence represents its <strong>degree of certainty</strong>. For example, the ssentence "<i>I wish it would stop raining</i>" has a rather low modality, whereas "<i>It will stop raining</i>" has a high one. Accuracy is about 68% for Wikipedia texts.</p>
+			<p>The modality of a sentence represents its <strong>degree of certainty</strong>. For example, the sentence "<i>I wish it would stop raining</i>" has a rather low modality, whereas "<i>It will stop raining</i>" has a high one. Accuracy is about 68% for Wikipedia texts.</p>
 
 			<div align="center" id="footer">
 			  <p><small>Powered by the <a href="http://www.clips.ua.ac.be/pages/pattern">Pattern library</a>. Some of the explanations above are base on the documentation of the latter.</small></p>
