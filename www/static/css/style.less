@@ -143,10 +143,49 @@ a:hover {
 }
 
 form {
-	input, textarea, button {
-		background: @white;
+	background: @pink;
 
+	padding: 40px 40px 30px;
+
+	label {
+		display: block;
+		margin-bottom: 30px;
+	}
+
+	input, textarea, button {
+		background: #eee;
 		padding: 5px 10px;
+	}
+
+	input {
+		margin-left: 20px;
+		font-size: 14px;
+
+		&[type="text"] {
+			width: 300px;
+		}
+
+		&[type="number"] {
+			padding: 0;
+			height: 29px;
+			padding-left: 10px;
+			font-size: 18px;
+		}
+	}
+
+	textarea {
+		width: 100%;
+		height: 200px;
+	}
+
+	button {
+		float: right;
+	}
+
+	&:after {
+		clear: both;
+		content: " ";
+		display: block;
 	}
 }
 
@@ -160,6 +199,14 @@ form {
 		cursor: pointer;
 		border: 1px solid @black;
 		padding: 10px;
+
+		margin-bottom: 0;
+		border-bottom: 0;
+		border-left: 0;
+
+		&.active {
+			background: @pink;
+		}
 	}
 
 	&:after {

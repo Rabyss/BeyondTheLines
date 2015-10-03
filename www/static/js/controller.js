@@ -17,6 +17,13 @@ function showTab(tabName) {
 	tab.style.display = 'block';
 }
 
+function removeActiveClass() {
+	var headers = document.querySelectorAll('#tabs-header h3')
+	for (var i = 0; i < headers.length; i++) {
+		headers[i].classList.remove('active')
+	}
+}
+
 // Add a pin on the big triangle
 function addPin(x, y, data) {
 	var triangle = document.querySelector('#triangle')
@@ -87,16 +94,22 @@ function run() {
 	var tabText = document.querySelector('#tab-text')
 	tabText.addEventListener('click', function () {
 		showTab('#form-text')
+		removeActiveClass()
+		tabText.classList.add('active')
 	})
 
 	var tabWebpage = document.querySelector('#tab-webpage')
 	tabWebpage.addEventListener('click', function () {
 		showTab('#form-webpage')
+		removeActiveClass()
+		tabWebpage.classList.add('active')
 	})
 
 	var tabWebsite = document.querySelector('#tab-website')
 	tabWebsite.addEventListener('click', function () {
 		showTab('#form-website')
+		removeActiveClass()
+		tabWebsite.classList.add('active')
 	})
 
 	setTimeout(function () {
