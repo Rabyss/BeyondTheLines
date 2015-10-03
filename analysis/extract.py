@@ -1,9 +1,11 @@
+#!/usr/bin/python2
+# -*- coding: utf-8 -*-
+
 from goose import Goose
 import sys
 
 def extract(url, language = None):
     if language:
-        print language
         g = Goose({'use_meta_language': False, 'target_language': language})
     else:
         g = Goose()
@@ -17,7 +19,7 @@ def main():
         print "extract <url> : extract content from an url and prints it"
         print "extract <url> <language> : extract content from an url using language tag and prints it"
         print "extract --help : prints this message"
-        return 0
+        return 1
     language = None
     if len(sys.argv) > 2:
         language = sys.argv[2]
