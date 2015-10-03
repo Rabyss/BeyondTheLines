@@ -1,18 +1,17 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseNotFound
 from libs import search
 from libs.extract import extract
 from libs.analysis import analyze
 import os
 import json
-import logging
-
-logger = logging.getLogger(__name__)
 
 
-def handle(request):
+def website(request):
+    if request.method != "GET":
+        return HttpResponseBadRequest("This should be a GET request.")
     params = request.GET
     if "topic" not in params:
         return HttpResponseBadRequest("Parameter \"topic\" not set.")
@@ -22,13 +21,30 @@ def handle(request):
         return HttpResponseBadRequest("Parameter \"quantity\" must be an integer.")
     if "url" not in params:
         return HttpResponseBadRequest("Parameter \"url\" not set.")
-    return perform_analysis(params["topic"], params["quantity"], params["url"])
+    return website_analysis(params["topic"], params["quantity"], params["url"])
 
 
-def perform_analysis(query, quantity, url):
+def webpage(request):
+    if request.method != "GET":
+        return HttpResponseBadRequest("This should be a GET request.")
+    params = request.GET
+    if "url" not in params:
+        return HttpResponseBadRequest("Parameter \"url\" not set.")
+    return webpage_analysis(params["url"])
+
+
+def webpage_analysis(url):
+    text = extract(url).cleaned_text
+
+    if text != "":
+        return HttpResponse(json.dumps(analyze(text)))
+    return HttpResponseNotFound("The page has no interesting feature.")
+
+
+def website_analysis(topic, quantity, url):
     quantity = int(quantity)
     engine = search.BingSearchEngine(os.environ["BING_API_KEY"])
-    urls = search.search_from_sources(url, query, quantity, engine)
+    urls = search.search_from_sources(url, topic, quantity, engine)
 
     results = []
     for url in urls:

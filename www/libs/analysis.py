@@ -18,7 +18,7 @@ def analyze(s, language=None):
     # Detect language if not provided
     if language is None:
         language = detect(s)
-    if language not in ["en", "fr"]:
+    if language not in ["en"]:
         raise ValueError("Language "+language+" not supported")
 
     # Load pattern
