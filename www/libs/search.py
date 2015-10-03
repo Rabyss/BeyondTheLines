@@ -52,7 +52,7 @@ def search_from_sources(url, query, results_per_query, engine):
     else:
         query = (url, "site:" + url + " " + query)
 
-    return engine.extract_urls_from_result(engine.search_with_params(query[0], params).json(), results_per_query)
+    return engine.extract_urls_from_result(engine.search_with_params(query[1], params).json(), results_per_query)
 
 
 def main():
@@ -60,7 +60,8 @@ def main():
     # This environment variable must be set
     key = os.environ["BING_API_KEY"]
     bing = BingSearchEngine(key)
-    print search_from_sources(["web", "udc.ch"], "politique", 1, bing)
+    #print search_from_sources(["web", "udc.ch"], "politique", 1, bing)
+    print search_from_sources("udc.ch", "immigration", 10 , bing)
     return 0
 
 if __name__ == "__main__":
