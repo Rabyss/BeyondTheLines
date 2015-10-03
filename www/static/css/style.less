@@ -34,6 +34,8 @@
 body {
 	overflow-x: hidden;
 	background-image: url("/static/img/background.png");
+
+	padding: 0 150px;
 }
 
 h1, h2, h3 {
@@ -51,9 +53,10 @@ p {
 
 .container {
 	position: relative;
-	padding: 0 200px 50px;
+	padding: 50px 100px;
 	max-width: 1300px;
 	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.3);
 }
 
 h2, h3 {
@@ -93,7 +96,7 @@ a:hover {
 #title {
 	position: relative;
 
-	margin: 50px 0;
+	margin-bottom: 50px 0;
 
 	padding: 20px 50px;
 
@@ -131,6 +134,19 @@ a:hover {
 			1px -1px 0 rgba(42, 17, 14, 0.4),
 			-1px 1px 0 rgba(42, 17, 14, 0.4),
 			1px 1px 0 rgba(42, 17, 14, 0.4);
+	}
+}
+
+#data-set {
+	.legend {
+		padding: 15px;
+		background: @pink;
+		white-space: nowrap;
+		overflow: hidden;
+
+		&:not(:last-child) {
+			border-bottom: 1px solid @black;
+		}
 	}
 }
 
