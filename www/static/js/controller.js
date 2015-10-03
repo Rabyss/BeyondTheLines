@@ -4,11 +4,16 @@ google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(checkLoaded);
 
 function checkLoaded() {
-    if (document.readyState !== 'loading') {
+	if (document.readyState !== 'loading') {
 	run()
-    } else {
+	} else {
 	document.addEventListener('DOMContentLoaded', run)
-    }
+	}
+}
+
+function shadeColor2(color, percent) {   
+	var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+	return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
 }
 
 function showTab(tabName) {
@@ -30,7 +35,7 @@ function removeActiveClass() {
 }
 
 // Add a pin on the big triangle
-function addPin(x, y, data) {
+function addPin(x, y, data, color) {
 	var triangle = document.querySelector('#triangle')
 
 	var pin = document.createElement('div')
@@ -38,9 +43,12 @@ function addPin(x, y, data) {
 	var coords = pattern2html(x, y)
 	pin.style.left = coords.x + 'px'
 	pin.style.top = coords.y + 'px'
+	pin.style.background = darken(color)
 	
 	var info = document.createElement('div')
 	info.classList.add('info')
+	info.style.background = darken(color)
+
 	var infoContent = document.createTextNode(data)
 
 	info.appendChild(infoContent)
@@ -60,7 +68,7 @@ function pattern2html(x, y) {
 	}
 }
 
-function boxPlot(avg, deviation, min, max, parent) {
+function boxPlot(avg, deviation, min, max, parent, color) {
 	var div = document.querySelector(parent)
 	var width = div.offsetWidth
 	
@@ -72,46 +80,75 @@ function boxPlot(avg, deviation, min, max, parent) {
 	box.classList.add('box')
 	box.style.left =  boxLeftPos + 'px'
 	box.style.width = boxWidth + 'px'
+	box.style.background = color
 
 	var avgDiv = document.createElement('div')
 	avgDiv.classList.add('avg')
 	avgDiv.style.left =  avgPos + 'px'
+	avgDiv.style.background = darken(color)
+	console.log(darken(color))
 
 	div.appendChild(box)
 	div.appendChild(avgDiv)
 }
 
-function modality(avg, deviation) {
-	boxPlot(avg, deviation, -1, 1, '#modality')
+function modality(avg, deviation, color) {
+	boxPlot(avg, deviation, -1, 1, '#modality', color)
 }
 
-function wordPerSentence(avg, deviation) {
-	boxPlot(avg, deviation, 0, 100, '#word-per-sentence')
+function wordPerSentence(avg, deviation, color) {
+	boxPlot(avg, deviation, 0, 100, '#word-per-sentence', color)
 }
 
 function moods(data)
 {
-    var data = google.visualization.arrayToDataTable([
-        ['', ''],
-        ['Indicative', data["indicative"]],
-        ['Imperative', data["imperative"]],
-        ['Conditonal', data["conditional"]],
-        ['Subjunctive', data["subjunctive"]],
-    ]);
-    var options = {
+	var data = google.visualization.arrayToDataTable([
+		['', ''],
+		['Indicative', data["indicative"]],
+		['Imperative', data["imperative"]],
+		['Conditonal', data["conditional"]],
+		['Subjunctive', data["subjunctive"]],
+	]);
+	var options = {
 	colors: ['#FE2A53', '#ffab91'],
 	hAxis: { maxValue: 100 }
-    };
+	};
 
-    var material = new google.visualization.BarChart(document.getElementById('mood'));
-    material.draw(data, options);
+	var material = new google.visualization.BarChart(document.getElementById('mood'));
+	material.draw(data, options);
 }
 
 function handleData(data) {
-    addPin(data.polarity[0], data.subjectivity[0])
-    wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1])
-    modality(data.modality[0], data.modality[1])
-    moods(data.moods)
+	var color = getNewColor()
+	addPin(data.polarity[0], data.subjectivity[0], '', color)
+	wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1], color)
+	modality(data.modality[0], data.modality[1], color)
+	moods(data.moods)
+}
+
+function darken(color) {
+	return shadeColor2(color, -0.25)
+}
+
+var predefinedColors = [
+	'#bcf0b6',
+	'#f0b6c4',
+	'#d7b6f0',
+	'#fbeb9e'
+]
+
+var lastUsedPredefinedColors = 0
+
+function getNewColor() {
+	var color = '#f0b6c4'
+	if (lastUsedPredefinedColors >= predefinedColors.length) {
+		// TODO get a light random color (https://github.com/davidmerfield/randomColor)
+	} else {
+		color = predefinedColors[lastUsedPredefinedColors]
+		lastUsedPredefinedColors++
+	}
+
+	return color
 }
 
 function run() {
