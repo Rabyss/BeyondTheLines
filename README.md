@@ -9,7 +9,7 @@ Then, access: [http://localhost:8000](http://localhost:8000
 
 ### API access ###
 
-Access ```http://localhost:8000/api?topic=<query>&nquantity=<nb>&surl=<source>```
+Access ```http://localhost:8000/api?topic=<query>&quantity=<nb>&surl=<source>```
 
 * `topic` : string representing the topic to search
 * `quanrtity` : wanted number of results
