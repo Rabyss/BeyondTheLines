@@ -31,6 +31,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 h1, h2, h3 {
 	font-family: 'Limelight', cursive;
 	color: @black;
@@ -38,15 +42,48 @@ h1, h2, h3 {
 
 p {
 	font-family: 'Playfair Display', serif;
+	margin-bottom: 10px;
 }
 
 .container {
 	position: relative;
 	padding: 0 200px 50px;
+	max-width: 1300px;
+	margin: 0 auto;
 }
 
 h2 {
-	margin: 20px 0 30px;
+	margin: 30px 0 10px;
+}
+
+a:hover {
+	color: @blue;
+}
+
+.github-fork-ribbon {
+	position: absolute;
+	z-index: 100;
+	top: 60px;
+	right: -60px;
+	width: 300px;
+	padding: 5px 50px;
+	text-align: center;
+	color: @white;
+	transform: rotate(45deg);
+
+	background: @pink;
+
+	font-family: 'Cookie', cursive;
+	font-size: 2em;
+	font-style: italic;
+
+	a {
+		text-decoration: none;
+
+		&:not(:hover) {
+			color: @black;
+		}
+	}
 }
 
 #title {
@@ -81,7 +118,6 @@ h2 {
 		text-align: right;
 		
 		color: @pink;
-		font-family: 'Lobster Two', cursive;
 		font-family: 'Cookie', cursive;
 		font-size: 2.5em;
 		font-style: italic;
@@ -94,22 +130,27 @@ h2 {
 	}
 }
 
+.clear-float {
+	&:after {
+		content: ' ';
+		display: block;
+		clear: both;
+	}
+}
+
 #triangle {
 	position: relative;
-	margin: 100px auto;
 
-	float:left;
+	margin: 50px;
+	margin-top: 30px;
+
+	float: right;
 
 	width: @triangle-width;
 	height: @triangle-height;
 	border-left: @triangle-width/2 solid transparent;
 	border-right: @triangle-width/2 solid transparent;
 	border-top: @triangle-height solid @triangle-color;
-
-	&:after {
-	    clear: both;
-	    content: " ";
-	}
 	
 	.legend {
 		position: absolute;
@@ -176,6 +217,8 @@ h2 {
 	height: 50px;
 	background: @light-blue;
 
+	margin: 10px 0;
+
 	.box {
 		position: absolute;
 
@@ -195,7 +238,5 @@ h2 {
 }
 
 #footer {
-
-    margin-top: 20px;
-
+	margin-top: 20px;
 }

@@ -40,15 +40,11 @@ function pattern2html(x, y) {
 function boxPlot(avg, deviation, min, max, parent) {
 	var div = document.querySelector(parent)
 	var width = div.offsetWidth
-
-	// var avgPos = (avg / max) * width;
+	
 	var avgPos = ((avg - min) / (max - min)) * width;
 	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width;
 	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos;
 
-
-	console.log(width)
-	
 	var box = document.createElement('div')
 	box.classList.add('box')
 	box.style.left =  boxLeftPos + 'px'
