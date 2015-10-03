@@ -100,7 +100,7 @@ function wordPerSentence(avg, deviation, color) {
 	boxPlot(avg, deviation, 0, 100, '#word-per-sentence', color)
 }
 
-function moods(data)
+function moods(data, color)
 {
 	var data = google.visualization.arrayToDataTable([
 		['', ''],
@@ -109,9 +109,11 @@ function moods(data)
 		['Conditonal', data["conditional"]],
 		['Subjunctive', data["subjunctive"]],
 	]);
+
 	var options = {
-	colors: ['#FE2A53', '#ffab91'],
-	hAxis: { maxValue: 100 }
+		colors: [color, darken(color)],
+		hAxis: { maxValue: 100 },
+		backgroundColor: { fill:'transparent' }
 	};
 
 	var material = new google.visualization.BarChart(document.getElementById('mood'));
@@ -123,7 +125,7 @@ function handleData(data) {
 	addPin(data.polarity[0], data.subjectivity[0], '', color)
 	wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1], color)
 	modality(data.modality[0], data.modality[1], color)
-	moods(data.moods)
+	moods(data.moods, color)
 }
 
 function darken(color) {
