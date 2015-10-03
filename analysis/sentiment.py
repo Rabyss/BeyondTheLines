@@ -5,13 +5,18 @@ from extract import extract
 import sys
 import importlib
 import argparse
-
+from langdetect import detect
 
 def sentiment(s, language=None):
-    if language:
-        pattern = importlib.import_module("pattern." + language)
-    else:
-        import pattern.en as pattern
+    if language == None:
+        language = detect(s)
+    if language not in ["en","fr"]:
+        raise Exception("Language not supported")
+    # if language:
+    #     pattern = importlib.import_module("pattern." + language)
+    # else:
+    #     import pattern.en as pattern
+    pattern = importlib.import_module("pattern." + language)
     return pattern.sentiment(s)
 
 
