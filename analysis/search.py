@@ -74,7 +74,7 @@ def main():
     # This environment variable must be set
     key = os.environ["BING_API_KEY"]
     bing = BingSearchEngine(key)
-    print search_from_sources(["web", "udc.ch"], "étrangers", 1, bing)
+    print search_from_sources(["web", "udc.ch"], "politique", 1, bing)
     return 0
 
 if __name__ == "__main__":

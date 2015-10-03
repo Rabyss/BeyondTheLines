@@ -10,8 +10,10 @@ import numpy as np
 from collections import Counter
 import json
 
+
 def stats(l):
     return np.mean(l), np.std(l)
+
 
 def analyze(s, language=None):
     # Detect language if not provided
@@ -35,7 +37,9 @@ def analyze(s, language=None):
 
 
 def analyze_url(url, language=None):
-    return analyze()
+    string = extract(url, language).cleaned_text
+    return analyze(string)
+
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze text in a string or a web page.")
@@ -44,8 +48,8 @@ def main():
     parser.add_argument("-u", "--url", action="store_true", help="the string is an url")
     args = parser.parse_args()
     if args.url:
-        #Extract text from URL
-        args.string=extract(args.string, args.language).cleaned_text
+        # Extract text from URL
+        args.string = extract(args.string, args.language).cleaned_text
     print analyze(args.string, args.language)
     return 0
 
