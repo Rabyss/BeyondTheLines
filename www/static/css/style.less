@@ -11,7 +11,7 @@
 @black: #2a110e;
 @yellow: #dbbc01;
 
-@triangle-width: 500px;
+@triangle-width: 300px;
 @triangle-height: @triangle-width * sqrt(3)/2;
 @triangle-color: @light-blue;
 
@@ -98,12 +98,19 @@ h2 {
 	position: relative;
 	margin: 100px auto;
 
+	float:left;
+
 	width: @triangle-width;
 	height: @triangle-height;
 	border-left: @triangle-width/2 solid transparent;
 	border-right: @triangle-width/2 solid transparent;
 	border-top: @triangle-height solid @triangle-color;
 
+	&:after {
+	    clear: both;
+	    content: " ";
+	}
+	
 	.legend {
 		position: absolute;
 
@@ -185,4 +192,10 @@ h2 {
 		width: 5px;
 		background: @red;
 	}
+}
+
+#footer {
+
+    margin-top: 20px;
+
 }
