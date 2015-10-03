@@ -49,7 +49,7 @@ GET request to ```http://localhost:8000/api/website?topic=<query>&quantity=<nb>&
 * `topic` : string representing the topic to search
 * `quanrtity` : wanted number of results
 * `url` : source url
-* example : ```http://localhost:8000/api?topic=foreigner&quantity=5&url=cnn.com```
+* example : ```http://localhost:8000/api?/websitetopic=foreigner&quantity=5&url=cnn.com```
 
 #### Json example ####
 
