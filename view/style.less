@@ -8,6 +8,8 @@
 @info-width: 300px;
 @info-height: 150px;
 
+@info-padding: 10px;
+
 * {
 	margin: 0;
 	padding: 0;
@@ -20,10 +22,29 @@
 	margin: 100px auto;
 
 	width: @triangle-width;
-	height: 200px; /* 0.866 x width */
+	height: @triangle-height;
 	border-left: @triangle-width/2 solid transparent;
 	border-right: @triangle-width/2 solid transparent;
 	border-top: @triangle-height solid @triangle-color;
+
+	.legend {
+		position: absolute;
+
+		&#legend-positive {
+			top: -@triangle-height - 30;
+			left: -@triangle-width/2;
+		}
+
+		&#legend-negative {
+			top: -@triangle-height - 30;
+			right: -@triangle-width/2;
+		}
+		
+		&#legend-objective {
+			top: 10px;
+			transform: translateX(-50%);
+		}
+	}
 
 	.pin {
 		position: absolute;
@@ -39,13 +60,14 @@
 			display: none;
 			width: @info-width;
 			height: @info-height;
-			padding: 10px;
+			padding: @info-padding;
 			border-radius: @pin-size/2 @pin-size/2 @pin-size/2 0;
 			// transform: translateY(-@info-height) translateX(-@info-width/2 + @pin-size/2);
 			transform: translateY(-@info-height + @pin-size/2);
 		}
 
 		&:hover {
+			z-index: 10;
 			background: @info-color;
 			border-radius: 0 0 @pin-size/2 @pin-size/2;
 			
