@@ -1,0 +1,32 @@
+@triangle-width: 500px;
+@triangle-height: @triangle-width * sqrt(3)/2;
+@triangle-color: lightBlue;
+
+@pin-size: 10px;
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+#triangle {
+	position: relative;
+	margin: auto;
+
+	width: @triangle-width;
+	height: 200px; /* 0.866 x width */
+	border-left: @triangle-width/2 solid transparent;
+	border-right: @triangle-width/2 solid transparent;
+	border-top: @triangle-height solid @triangle-color;
+
+	.pin {
+		position: absolute;
+		width: @pin-size;
+		height: @pin-size;
+		background: red;
+		transform: translateX(-@triangle-width/2 - @pin-size/2) translateY(-@triangle-height - @pin-size/2);
+		border-radius: @pin-size/2;
+	}
+}
