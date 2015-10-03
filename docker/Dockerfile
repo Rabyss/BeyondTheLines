@@ -19,3 +19,5 @@ RUN pip install langdetect
 
 # Django
 RUN apt-get install -y python-django
+
+# VOLUME ["/app"]
