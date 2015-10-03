@@ -43,7 +43,7 @@
 				<!-- Webpage -->
 				<form id="form-webpage" class="tab">
 					<label for="url">Web page URL
-						<input type="text" name="url" id="url" value="http://">
+						<input type="text" name="url" id="urlpage" value="http://">
 					</label>
 
 					<button type="submit">Analyze</button>
@@ -52,7 +52,7 @@
 				<!-- Website -->
 				<form id="form-website" class="tab">
 					<label for="url">Website URL
-						<input type="text" name="url" id="url" value="http://">
+						<input type="text" name="url" id="urlsite" value="http://">
 					</label>
 					<label for="topic">Topic
 						<input type="text" id="topic" name="topic"><br/>
@@ -63,6 +63,13 @@
 					</label>
 					<button type="submit">Analyze</button>
 				</form>
+			</div>
+
+			<div id="error">
+				An error occured : the text may be empty, in a non supported language or the request is malformed.
+			</div>
+			<div id="spinner">
+				Processing...
 			</div>
 
 			<h2>Data Set</h2>

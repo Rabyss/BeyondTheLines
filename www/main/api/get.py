@@ -13,13 +13,13 @@ def website(request):
     if request.method != "GET":
         return HttpResponseBadRequest("This should be a GET request.")
     params = request.GET
-    if "topic" not in params:
+    if "topic" not in params or len(params["topic"]) == 0:
         return HttpResponseBadRequest("Parameter \"topic\" not set.")
     if "quantity" not in params:
         return HttpResponseBadRequest("Parameter \"quantity\" not set.")
     if not is_int(params["quantity"]):
         return HttpResponseBadRequest("Parameter \"quantity\" must be an integer.")
-    if "url" not in params:
+    if "url" not in params or len(params["url"]) == 0 or params["url"] == "http://":
         return HttpResponseBadRequest("Parameter \"url\" not set.")
     return website_analysis(params["topic"], params["quantity"], params["url"])
 

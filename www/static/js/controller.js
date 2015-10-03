@@ -90,9 +90,22 @@ function handleData(data) {
 	modality(data.modality[0], data.modality[1])
 }
 
+function show(div) {
+	div.style.display = "block"
+}
+
+function hide(div) {
+	div.style.display = "none"
+}
+
 function run() {
+	var spinner = document.querySelector("#spinner")
+	var error = document.querySelector("#error")
+
 	var tabText = document.querySelector('#tab-text')
 	tabText.addEventListener('click', function () {
+		hide(error)
+		hide(spinner)
 		showTab('#form-text')
 		removeActiveClass()
 		tabText.classList.add('active')
@@ -100,6 +113,8 @@ function run() {
 
 	var tabWebpage = document.querySelector('#tab-webpage')
 	tabWebpage.addEventListener('click', function () {
+		hide(error)
+		hide(spinner)
 		showTab('#form-webpage')
 		removeActiveClass()
 		tabWebpage.classList.add('active')
@@ -107,9 +122,84 @@ function run() {
 
 	var tabWebsite = document.querySelector('#tab-website')
 	tabWebsite.addEventListener('click', function () {
+		hide(error)
+		hide(spinner)
 		showTab('#form-website')
 		removeActiveClass()
 		tabWebsite.classList.add('active')
+	})
+
+	var buttonText = document.querySelector('#form-text button')
+	buttonText.addEventListener('click', function (event) {
+		event.preventDefault()
+		hide(error)
+		show(spinner)
+		var form = document.querySelector("#form-text")
+		fetch('/api/text', {
+			method: 'post',
+			body: new FormData(form)
+		}).then(function(response) {
+			hide(spinner)
+			if (response.status != 200) {
+				show(error)
+				return ""
+			}
+    		return response.json()
+  		}).then(function(json) {
+  			if (json != "") {
+				handleData(json)
+			}
+		}).catch(function(ex) {
+			console.log('parsing failed', ex)
+		})
+	})
+
+	var buttonPage = document.querySelector("#form-webpage button")
+	buttonPage.addEventListener('click', function (event) {
+		event.preventDefault()
+		hide(error)
+		show(spinner)
+		var inputUrl = document.querySelector("#form-webpage #urlpage").value
+		fetch('/api/webpage?url=' + inputUrl).then(function(response) {
+			hide(spinner)
+			if (response.status != 200) {
+				show(error)
+				return ""
+			}
+    		return response.json()
+  		}).then(function(json) {
+  			if (json != "") {
+				handleData(json)
+			}
+		}).catch(function(ex) {
+			console.log('parsing failed', ex)
+		})
+	})
+
+	var buttonSite = document.querySelector("#form-website button")
+	buttonSite.addEventListener('click', function (event) {
+		event.preventDefault()
+		hide(error)
+		show(spinner)
+		var inputUrl = document.querySelector("#form-website #urlsite").value
+		var inputTopic = document.querySelector("#form-website #topic").value
+		var inputNumber = document.querySelector("#form-website #numberResults").value
+		fetch('/api/website?url=' + inputUrl 
+			+ '&topic=' + inputTopic 
+			+ "&quantity=" + inputNumber).then(function(response) {
+			hide(spinner)
+			if (response.status != 200) {
+				show(error)
+				return ""
+			}
+    		return response.json()
+  		}).then(function(json) {
+  			if (json != "") {
+				handleData(json)
+			}
+		}).catch(function(ex) {
+			console.log('parsing failed', ex)
+		})
 	})
 
 	setTimeout(function () {
