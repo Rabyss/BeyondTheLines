@@ -7,9 +7,11 @@ Run: ```python2 www/manage.py runserver```
 
 Then, access: [http://localhost:8000](http://localhost:8000
 
-### API access ###
+## API ##
 
-Access ```http://localhost:8000/api?topic=<query>&quantity=<nb>&surl=<source>```
+### Website analysis ###
+
+GET request to ```http://localhost:8000/api/website?topic=<query>&quantity=<nb>&surl=<source>```
 
 * `topic` : string representing the topic to search
 * `quanrtity` : wanted number of results
@@ -46,6 +48,17 @@ Access ```http://localhost:8000/api?topic=<query>&quantity=<nb>&surl=<source>```
   }
 }
 ```
+
+### Web page analysis ###
+
+GET request to ```http://localhost:8000/api/webpage?surl=<source>```
+* `url` : page to analyze
+* example : ```http://localhost:8000/api/webpage?url=http://edition.cnn.com/2015/10/03/asia/afghanistan-doctors-without-borders-hospital/index.html```
+
+
+### Textt analysis ###
+
+POST request to ```http://localhost:8000/api/text``` with attribute `text` which is the text to analyze.
 
 ## Features ##
 
