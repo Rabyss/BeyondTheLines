@@ -17,7 +17,6 @@ function addPin(x, y, data) {
 	info.appendChild(infoContent)
 	pin.appendChild(info)
 	triangle.appendChild(pin)
-
 }
 
 // Convert form API coords to coords in the big triangle
