@@ -14,7 +14,7 @@ def stats(l):
 
 def analyze(s, language=None):
     # Detect language if not provided
-    if language:
+    if language is None:
         language = detect(s)
     if language not in ["en", "fr"]:
         raise Exception("Language "+language+"not supported")
@@ -26,14 +26,15 @@ def analyze(s, language=None):
     analysis["wordPerSentence"] = stats([len(s.words) for s in pt])
     analysis["moods"] = Counter([pattern.mood(s) for s in pt])
     analysis["modality"] = stats([pattern.modality(s) for s in pt])
-    analysis["sentiment"] = stats([pattern.sentiment(s)] for s in pt)
-    #return pattern.sentiment(s)
+    sentiments = [pattern.sentiment(s) for s in pt]
+    analysis["polarity"] = stats([s[0] for s in sentiments])
+    analysis["subjectivity"] = stats([s[0] for s in sentiments])
+    analysis["positivity"] = stats([int(pattern.positive(s)) for s in pt])
     return analysis
 
 
 def analyze_url(url, language=None):
-    return analyze(extract(url, language).cleaned_text)
-
+    return analyze()
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze text in a string or a web page.")
@@ -42,9 +43,9 @@ def main():
     parser.add_argument("-u", "--url", action="store_true", help="the string is an url")
     args = parser.parse_args()
     if args.url:
-        print analyze_url(args.string, args.language)
-    else:
-        print analyze(args.string, args.language)
+        #Extract text from URL
+        args.string=extract(args.string, args.language).cleaned_text
+    print analyze(args.string, args.language)
     return 0
 
 if __name__ == "__main__":
