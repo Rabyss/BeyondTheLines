@@ -5,7 +5,7 @@ Our awesome analysis project
 
 Run: ```python2 www/manage.py runserver```
 
-Then, access: http://localhost:8000
+Then, access: [http://localhost:8000](http://localhost:8000)
 
 ## Features ##
 
