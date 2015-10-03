@@ -45,20 +45,14 @@ class BingSearchEngine:
         return urls
 
 
-def search_from_sources(sources, query, results_per_query, engine):
+def search_from_sources(url, query, results_per_query, engine):
     params = {"$format": "json", "$top": results_per_query, "$skip": 0}
-    queries = []
-    for source in sources:
-        if source == "web":
-            queries.append((source, query))
-        else:
-            queries.append((source, "site:" + source + " " + query))
+    if url == "web":
+        query = (url, query)
+    else:
+        query = (url, "site:" + url + " " + query)
 
-    results = {}
-    for (s, q) in queries:
-        results[s] = engine.extract_urls_from_result(engine.search_with_params(q, params).json(), results_per_query)
-
-    return results
+    return engine.extract_urls_from_result(engine.search_with_params(query[0], params).json(), results_per_query)
 
 
 def main():

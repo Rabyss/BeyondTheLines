@@ -14,40 +14,50 @@ logger = logging.getLogger(__name__)
 
 def handle(request):
     params = request.GET
-    if "query" not in params:
-        return HttpResponseBadRequest("Parameter \"query\" not set.")
-    if "nb_per_source" not in params:
-        return HttpResponseBadRequest("Parameter \"nb_per_source\" not set.")
-    if not is_int(params["nb_per_source"]):
-        return  HttpResponseBadRequest("Parameter \"nb_per_source\" must be an integer.")
-    if "sources" not in params or len(params["sources"]) < 1:
-        return HttpResponseBadRequest("Parameter \"sources\" not set.")
-    return perform_analysis(params["query"], params["nb_per_source"], params["sources"])
+    if "topic" not in params:
+        return HttpResponseBadRequest("Parameter \"topic\" not set.")
+    if "quantity" not in params:
+        return HttpResponseBadRequest("Parameter \"quantity\" not set.")
+    if not is_int(params["quantity"]):
+        return HttpResponseBadRequest("Parameter \"quantity\" must be an integer.")
+    if "url" not in params:
+        return HttpResponseBadRequest("Parameter \"url\" not set.")
+    return perform_analysis(params["topic"], params["quantity"], params["url"])
 
 
-def perform_analysis(query, nb_per_source, sources):
-    sources = sources.split(',')
-    if not isinstance(sources, list):
-        sources = [sources]
-    nb_per_source = int(nb_per_source)
+def perform_analysis(query, quantity, url):
+    quantity = int(quantity)
     engine = search.BingSearchEngine(os.environ["BING_API_KEY"])
-    urls = search.search_from_sources(sources, query, nb_per_source, engine)
-    result = {}
-    for key in urls.keys():
-        result[key] = []
-        for url in urls[key]:
-            try:
-                text = extract(url).cleaned_text
-                if text != "":
-                    result[key].append({
-                        "url": url,
-                        "data": analyze(text)
-                })
-            except ValueError as e:
-                print "Value Error :", e.message
-                pass
+    urls = search.search_from_sources(url, query, quantity, engine)
 
-    return HttpResponse(json.dumps(result), content_type="application/json")
+    results = []
+    for url in urls:
+        try:
+            text = extract(url).cleaned_text
+            if text != "":
+                results.append(analyze(text))
+        except ValueError as e:
+            print "Value Error :", e.message
+            pass
+
+    accumulator = {}
+
+    for analysis in results:
+        for key in analysis.keys():
+            if key not in accumulator:
+                accumulator[key] = analysis[key]
+            elif key != "moods":
+                accumulator[key] = [sum(x) for x in zip(accumulator[key], analysis[key])]
+            else:
+                accumulator[key].update(analysis[key].keys())
+
+    results_number = len(results)
+
+    for key in accumulator.keys():
+        if key != "moods":
+            accumulator[key] = [x/results_number for x in accumulator[key]]
+
+    return HttpResponse(json.dumps(accumulator), content_type="application/json")
 
 
 def is_int(s):
