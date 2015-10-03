@@ -103,6 +103,7 @@ function wordPerSentence(avg, deviation, color) {
 	boxPlot(avg, deviation, 0, 100, '#word-per-sentence', color)
 }
 
+// FIXME I'm seriously ugly
 var moodsInitialized = false
 var material
 var previousData
@@ -129,8 +130,6 @@ function moods(data, color) {
 		moodsInitialized = true
 	} else {
 		var newData = []
-
-		console.log(previousData)
 
 		previousData[0].push('')
 		previousData[1].push(data["indicative"])
@@ -165,6 +164,10 @@ var predefinedColors = [
 
 var lastUsedPredefinedColors = 0
 
+function getCurrentColor() {
+	return predefinedColors[lastUsedPredefinedColors]
+}
+
 function getNewColor() {
 	var color = '#f0b6c4'
 	if (lastUsedPredefinedColors >= predefinedColors.length) {
@@ -185,6 +188,39 @@ function hide(div) {
 	div.style.display = "none"
 }
 
+function addTextLegend(text, color) {
+	var dataset = document.querySelector('#data-set')
+	var legend = document.createElement('div')
+	legend.classList.add('legend')
+
+	var txt = document.createTextNode("Text: " + text)
+	legend.appendChild(txt)
+	legend.style.background = color
+	dataset.appendChild(legend)
+}
+
+function addWebsiteLegend(url, color) {
+	var dataset = document.querySelector('#data-set')
+	var legend = document.createElement('div')
+	legend.classList.add('legend')
+
+	var txt = document.createTextNode("Website: " + url)
+	legend.appendChild(txt)
+	legend.style.background = color
+	dataset.appendChild(legend)
+}
+
+function addWebpageLegend(inputUrl, inputTopic, inputNumber, color) {
+	var dataset = document.querySelector('#data-set')
+	var legend = document.createElement('div')
+	legend.classList.add('legend')
+
+	var txt = document.createTextNode("Website: " + inputUrl + " | Topic: " + inputTopic + " | Nuber of Pages: " + inputNumber)
+	legend.appendChild(txt)
+	legend.style.background = color
+	dataset.appendChild(legend)
+}
+
 function run() {
 	var spinner = document.querySelector("#spinner")
 	var error = document.querySelector("#error")
@@ -192,7 +228,6 @@ function run() {
 	var tabText = document.querySelector('#tab-text')
 	tabText.addEventListener('click', function () {
 		hide(error)
-		hide(spinner)
 		showTab('#form-text')
 		removeActiveClass()
 		tabText.classList.add('active')
@@ -201,7 +236,6 @@ function run() {
 	var tabWebpage = document.querySelector('#tab-webpage')
 	tabWebpage.addEventListener('click', function () {
 		hide(error)
-		hide(spinner)
 		showTab('#form-webpage')
 		removeActiveClass()
 		tabWebpage.classList.add('active')
@@ -210,7 +244,6 @@ function run() {
 	var tabWebsite = document.querySelector('#tab-website')
 	tabWebsite.addEventListener('click', function () {
 		hide(error)
-		hide(spinner)
 		showTab('#form-website')
 		removeActiveClass()
 		tabWebsite.classList.add('active')
@@ -222,6 +255,10 @@ function run() {
 		hide(error)
 		show(spinner)
 		var form = document.querySelector("#form-text")
+		
+		var textInput = document.querySelector("#form-text textarea").value
+		addTextLegend(textInput, getCurrentColor())
+
 		fetch('/api/text', {
 			method: 'post',
 			body: new FormData(form)
@@ -247,6 +284,9 @@ function run() {
 		hide(error)
 		show(spinner)
 		var inputUrl = document.querySelector("#form-webpage #urlpage").value
+
+		addWebsiteLegend(inputUrl, getCurrentColor())
+
 		fetch('/api/webpage?url=' + inputUrl).then(function(response) {
 			hide(spinner)
 			if (response.status != 200) {
@@ -271,6 +311,9 @@ function run() {
 		var inputUrl = document.querySelector("#form-website #urlsite").value
 		var inputTopic = document.querySelector("#form-website #topic").value
 		var inputNumber = document.querySelector("#form-website #numberResults").value
+
+		addWebpageLegend(inputUrl, inputTopic, inputNumber, getCurrentColor())
+
 		fetch('/api/website?url=' + inputUrl 
 			+ '&topic=' + inputTopic 
 			+ "&quantity=" + inputNumber).then(function(response) {
@@ -310,87 +353,6 @@ function run() {
 			"modality": [
 				0.6422299488705738,
 				0.3142989273647446
-			],
-			"moods": {
-				"conditional": 10,
-				"indicative": 37,
-				"subjunctive": 62
-			}
-		})
-		handleData({
-			"polarity": [
-				0.02293211129148629,
-				0.2174031579455767
-			],
-			"positivity": [
-				0.10833333333333334,
-				0.3061164310337067
-			],
-			"wordPerSentence": [
-				12.604166666666668,
-				4.501339746839157
-			],
-			"subjectivity": [
-				0.8293211129148629,
-				0.1174031579455767
-			],
-			"modality": [
-				0.2422299488705738,
-				0.2142989273647446
-			],
-			"moods": {
-				"conditional": 10,
-				"indicative": 37,
-				"subjunctive": 62
-			}
-		})
-		handleData({
-			"polarity": [
-				0.02293211129148629,
-				0.2174031579455767
-			],
-			"positivity": [
-				0.10833333333333334,
-				0.3061164310337067
-			],
-			"wordPerSentence": [
-				12.604166666666668,
-				4.501339746839157
-			],
-			"subjectivity": [
-				0.8293211129148629,
-				0.1174031579455767
-			],
-			"modality": [
-				0.2422299488705738,
-				0.2142989273647446
-			],
-			"moods": {
-				"conditional": 10,
-				"indicative": 37,
-				"subjunctive": 62
-			}
-		})
-		handleData({
-			"polarity": [
-				0.02293211129148629,
-				0.2174031579455767
-			],
-			"positivity": [
-				0.10833333333333334,
-				0.3061164310337067
-			],
-			"wordPerSentence": [
-				12.604166666666668,
-				4.501339746839157
-			],
-			"subjectivity": [
-				0.8293211129148629,
-				0.1174031579455767
-			],
-			"modality": [
-				0.2422299488705738,
-				0.2142989273647446
 			],
 			"moods": {
 				"conditional": 10,
