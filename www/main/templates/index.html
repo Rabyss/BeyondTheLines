@@ -9,17 +9,37 @@
 		<script src="/static/js/controller.js"></script>
 	</head>
 	<body>
-		<div id="title">
-			<h1>Beyond the lines</h1>
-			<h2>Article Sentimental Analysis</h2>
-		</div>
-		<div id="triangle">
-			<p id="legend-positive" class="legend">Positive</p>
-			<p id="legend-negative" class="legend">Negative</p>
-			<p id="legend-objective" class="legend">Objective</p>
-			<div class="pin" style="top: 100px; left: 150px;">
-				<div class="info">Lorem Ipsum</div>
+		<div class="container">
+			<div id="title">
+				<h1>Beyond the lines</h1>
+				<h2>Article Sentimental Analysis</h2>
 			</div>
+
+			<h2>Polarity &amp; Subjectivity</h2>
+			<div id="triangle">
+				<p id="legend-positive" class="legend">Positive</p>
+				<p id="legend-negative" class="legend">Negative</p>
+				<p id="legend-objective" class="legend">Objective</p>
+			</div>
+
+			<h2>Number of Words per Sentence</h2>
+
+			<p>The number of words per sentence can provide a measure of the complexity of a text. For example, the masterpiece <i>In Search of Lost Time</i> by French writer Marcel Proust has an average of 38 words per sentence, while that's of a children can be lower than 10.</p>
+			<div id="word-per-sentence" class="boxPlot"></div>
+
+			<h2>Register of Language</h2>
+
+			<h2>Semantic Fields</h2>
+			
+			<h2>Mood</h2>
+			<p>The mood of a text is computed from the use of modality verbs and adverbs. It can be <i>indicative</i>, <i>imperative</i>, <i>conditional</i> or <i>subjunctive</i>.</p>
+
+			<h2>Modality</h2>
+			
+			<div id="modality" class="boxPlot"></div>
+			<p>The modality of a sentence represents its degree of certainty. For example, the ssentence "<i>I wish it would stop raining</i>" has a rather low modality, whereas "<i>It will stop raining</i>" has a high one. Accuracy is about 68% for Wikipedia texts.</p>
+
+			<p><small>Some of these explanations are based on the documentation of the <a href="http://www.clips.ua.ac.be/pages/pattern">Pattern</a> library.</p></small>
 		</div>
 	</body>
 </html>

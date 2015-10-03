@@ -1,14 +1,22 @@
-@import url(https://fonts.googleapis.com/css?family=Abril+Fatface|Lobster+Two:400,700,400italic,700italic|Cookie|Limelight);
+@import url(https://fonts.googleapis.com/css?family=Abril+Fatface|Lobster+Two:400,700,400italic,700italic|Cookie|Limelight|Playfair+Display);
 
-@light-blue: lightblue;
-@pink: pink;
+//@blue: #009786;
+@blue: #68adb4;
+//@light-blue: #4ae3f5;
+@light-blue: #b3e1e1;
+@red: #fe2a53;
+@hotpink: #ff508b;
+@pink: #f0b6c4;
+@white: #eace8d;
+@black: #2a110e;
+@yellow: #dbbc01;
 
 @triangle-width: 500px;
 @triangle-height: @triangle-width * sqrt(3)/2;
 @triangle-color: @light-blue;
 
 @pin-size: 20px;
-@pin-color: red;
+@pin-color: @red;
 
 @info-color: @pink;
 @info-width: 300px;
@@ -25,28 +33,41 @@
 
 h1, h2, h3 {
 	font-family: 'Limelight', cursive;
+	color: @black;
+}
+
+p {
+	font-family: 'Playfair Display', serif;
+}
+
+.container {
+	position: relative;
+	padding: 0 200px 50px;
+}
+
+h2 {
+	margin: 20px 0 30px;
 }
 
 #title {
 	position: relative;
 
-	margin-top: 50px;
-	margin-bottom: 200px;
+	margin: 50px 0;
 
 	padding: 20px 50px;
 
-	width: 700px;
+	width: 730px;
 	background: @light-blue;
 	margin-left: 50%;
 	transform: translateX(-50%);
 
-	color: black;
+	color: @black;
 
 	text-shadow:
-		-1px -1px 0 rgba(255, 255, 255, 1),
-		1px -1px 0 rgba(255, 255, 255, 1),
-		-1px 1px 0 rgba(255, 255, 255, 1),
-		1px 1px 0 rgba(255, 255, 255, 1);
+		-2px -2px 0 @white,
+		2px -2px 0 @white,
+		-2px 2px 0 @white,
+		2px 2px 0 @white;
 
 	h1 {
 		font-size: 4em;
@@ -55,6 +76,8 @@ h1, h2, h3 {
 	h2 {
 		margin-top: -35px;
 		margin-right: 20px;
+		margin-bottom: 0;
+
 		text-align: right;
 		
 		color: @pink;
@@ -64,18 +87,11 @@ h1, h2, h3 {
 		font-style: italic;
 
 		text-shadow:
-			-1px -1px 0 rgba(0, 0, 0, 0.4),
-			1px -1px 0 rgba(0, 0, 0, 0.4),
-			-1px 1px 0 rgba(0, 0, 0, 0.4),
-			1px 1px 0 rgba(0, 0, 0, 0.4);
+			-1px -1px 0 rgba(42, 17, 14, 0.4),
+			1px -1px 0 rgba(42, 17, 14, 0.4),
+			-1px 1px 0 rgba(42, 17, 14, 0.4),
+			1px 1px 0 rgba(42, 17, 14, 0.4);
 	}
-}
-
-p {
-	font-family: 'Lobster Two', cursive;
-	font-weight: 700;
-	font-style: italic;
-	font-size: 1.5em;
 }
 
 #triangle {
@@ -136,5 +152,37 @@ p {
 				display: block;
 			}
 		}
+	}
+
+
+	p {
+		font-family: 'Lobster Two', cursive;
+		font-weight: 700;
+		font-style: italic;
+		font-size: 1.5em;
+	}
+}
+
+.boxPlot {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background: @light-blue;
+
+	.box {
+		position: absolute;
+
+		top: 0px;
+		bottom: 0px;
+
+		background: @pink;
+	}
+
+	.avg {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		width: 5px;
+		background: @red;
 	}
 }
