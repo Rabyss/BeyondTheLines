@@ -3,8 +3,10 @@
 
 from goose import Goose
 import sys
+import argparse
 
-def extract(url, language = None):
+
+def extract(url, language=None):
     if language:
         g = Goose({'use_meta_language': False, 'target_language': language})
     else:
@@ -14,17 +16,11 @@ def extract(url, language = None):
 
 
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] == "--help" :
-        print "Usage :"
-        print "extract <url> : extract content from an url and prints it"
-        print "extract <url> <language> : extract content from an url using language tag and prints it"
-        print "extract --help : prints this message"
-        return 1
-    language = None
-    if len(sys.argv) > 2:
-        language = sys.argv[2]
-    url = sys.argv[1]
-    print extract(url, language).cleaned_text
+    parser = argparse.ArgumentParser(description="Extract data from a web page")
+    parser.add_argument("url", metavar='url', type=str, help="the url to extract data from")
+    parser.add_argument("language", metavar="language", type=str, help="the language of the web page", nargs='?')
+    args = parser.parse_args()
+    print extract(args.url, args.language).cleaned_text
     return 0
 
 if __name__ == "__main__":
