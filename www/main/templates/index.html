@@ -15,6 +15,43 @@
 				<h1>Beyond the lines</h1>
 				<h2>Article Sentimental Analysis</h2>
 			</div>
+
+
+			<p><i>Beyond the lines</i> lets you perform <strong>linguistic analysis</strong> on <strong>text</strong>, <strong>webpages</strong> and <strong>websites</strong>, and compare the results from different sources. </p>
+
+			<p>In the website mode, the analysis can be performed on pages talking about a <strong>specific topic</strong>.</p>
+
+			<p><strong>For example</strong>, you may want to explore if political parties express negative or positive feelings towards certains themes, or if newspapers are objective, or show some opinion biais.</p>
+
+			<form>
+				<label for="mode">Mode
+					<select id="mode" name="mode">
+						<option value="text">Text</option>
+						<option value="webpage">Webpage</option>
+						<option value="website">Website</option>
+				</select>
+				</label>
+				<label for="text">Text
+					<textarea name="text" id="text"></textarea>
+				</label>
+				<label for="url">Web page URL
+					<input type="text" name="url" id="url" value="http://">
+				</label>
+				<label for="url">Website URL
+					<input type="text" name="url" id="url" value="http://">
+				</label
+				<label for="topic">Topic
+					<input type="text" id="topic" name="topic">
+				</label>
+				<label for="numberResults">Number of pages to search on the website about this topic
+					<select id="numberResults" name="numberResults">
+						<option value="10">5</option>
+						<option value="10">10</option>
+						<option value="10">20</option>						
+					</select>
+				</label>
+			</form>
+
 			<h2>Polarity &amp; Subjectivity</h2>
 
 			<div class="clear-float">
