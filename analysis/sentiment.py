@@ -7,15 +7,12 @@ import importlib
 import argparse
 from langdetect import detect
 
+
 def sentiment(s, language=None):
-    if language == None:
+    if language:
         language = detect(s)
-    if language not in ["en","fr"]:
+    if language not in ["en", "fr"]:
         raise Exception("Language not supported")
-    # if language:
-    #     pattern = importlib.import_module("pattern." + language)
-    # else:
-    #     import pattern.en as pattern
     pattern = importlib.import_module("pattern." + language)
     return pattern.sentiment(s)
 
