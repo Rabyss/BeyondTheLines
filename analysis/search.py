@@ -50,14 +50,31 @@ class BingSearchEngine(SearchEngine):
         return requests.get(request, auth=(self.key, self.key))
 
 
+def search_from_sources(sources, query, results_per_query, engine):
+    queries = []
+    for source in sources:
+        if source == "web":
+            queries.append(query)
+        else:
+            queries.append("site:" + source + " " + query)
+
+    return [extract_urls_from_result(engine.search(q).json(), results_per_query) for q in queries]
+
+
+def extract_urls_from_result(result, results_per_query):
+    web_results = result["d"]["results"][0]["Web"]
+    urls = [wr["Url"] for wr in web_results]
+    if len(urls) > results_per_query:
+        urls = urls[:results_per_query]
+    return urls
+
+
 def main():
     import os
     # This environment variable must be set
-    my_key = os.environ["BING_API_KEY"]
-    query_string = "Brad Pitt"
-    bing = BingSearchEngine(my_key)
-
-    print bing.search(query_string).json()
+    key = os.environ["BING_API_KEY"]
+    bing = BingSearchEngine(key)
+    print search_from_sources(["web", "udc.ch"], "étrangers", 1, bing)
     return 0
 
 if __name__ == "__main__":
