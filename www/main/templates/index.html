@@ -16,6 +16,7 @@
 				<h2>Article Sentimental Analysis</h2>
 			</div>
 
+			<h2>What does it do?</h2>
 
 			<p><i>Beyond the lines</i> lets you perform <strong>linguistic analysis</strong> on <strong>text</strong>, <strong>webpages</strong> and <strong>websites</strong>, and compare the results from different sources. </p>
 
@@ -23,34 +24,52 @@
 
 			<p><strong>For example</strong>, you may want to explore if political parties express negative or positive feelings towards certains themes, or if newspapers are objective, or show some opinion biais.</p>
 
-			<form>
-				<label for="mode">Mode
-					<select id="mode" name="mode">
-						<option value="text">Text</option>
-						<option value="webpage">Webpage</option>
-						<option value="website">Website</option>
-				</select>
-				</label>
-				<label for="text">Text
-					<textarea name="text" id="text"></textarea>
-				</label>
-				<label for="url">Web page URL
-					<input type="text" name="url" id="url" value="http://">
-				</label>
-				<label for="url">Website URL
-					<input type="text" name="url" id="url" value="http://">
-				</label
-				<label for="topic">Topic
-					<input type="text" id="topic" name="topic">
-				</label>
-				<label for="numberResults">Number of pages to search on the website about this topic
-					<select id="numberResults" name="numberResults">
-						<option value="10">5</option>
-						<option value="10">10</option>
-						<option value="10">20</option>						
-					</select>
-				</label>
-			</form>
+			<div id="tabs">
+				<div id="tabs-header">
+					<h3 id="tab-text">Text</h3>
+					<h3 id="tab-webpage">Webpage</h3>
+					<h3 id="tab-website">Website</h3>
+				</div>
+
+				<!-- Text -->
+				<form id="form-text" class="tab">
+					<label for="text">Text<br>
+						<textarea name="text" id="text"></textarea>
+					</label>
+					<br>
+					<button type="submit">Analyse</button>
+				</form>
+				
+				<!-- Webpage -->
+				<form id="form-webpage" class="tab">
+					<label for="url">Web page URL
+						<input type="text" name="url" id="url" value="http://">
+					</label>
+					<br>
+					<label for="topic">Topic
+						<input type="text" id="topic" name="topic">
+					</label>
+					<br>
+					<button type="submit">Analyse</button>
+				</form>
+
+				<!-- Website -->
+				<form id="form-website" class="tab">
+					<label for="url">Website URL
+						<input type="text" name="url" id="url" value="http://">
+					</label>
+					<br>
+					<label for="topic">Topic
+						<input type="text" id="topic" name="topic">
+					</label>
+					<br>
+					<label for="numberResults">Number of pages to search on the website about this topic
+						<input id="numberResults" name="numberResults" type="number" min="1" max="20">
+					</label>
+					<br>
+					<button type="submit">Analyse</button>
+				</form>
+			</div>
 
 			<h2>Polarity &amp; Subjectivity</h2>
 

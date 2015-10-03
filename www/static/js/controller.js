@@ -6,6 +6,17 @@ if (document.readyState !== 'loading') {
 	document.addEventListener('DOMContentLoaded', run)
 }
 
+function showTab(tabName) {
+	var tabs = document.querySelectorAll('.tab')
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].style.display = 'none';
+	}
+
+	var tab = document.querySelector(tabName)
+
+	tab.style.display = 'block';
+}
+
 // Add a pin on the big triangle
 function addPin(x, y, data) {
 	var triangle = document.querySelector('#triangle')
@@ -41,9 +52,9 @@ function boxPlot(avg, deviation, min, max, parent) {
 	var div = document.querySelector(parent)
 	var width = div.offsetWidth
 	
-	var avgPos = ((avg - min) / (max - min)) * width;
-	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width;
-	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos;
+	var avgPos = ((avg - min) / (max - min)) * width
+	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width
+	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos
 
 	var box = document.createElement('div')
 	box.classList.add('box')
@@ -73,6 +84,21 @@ function handleData(data) {
 }
 
 function run() {
+	var tabText = document.querySelector('#tab-text')
+	tabText.addEventListener('click', function () {
+		showTab('#form-text')
+	})
+
+	var tabWebpage = document.querySelector('#tab-webpage')
+	tabWebpage.addEventListener('click', function () {
+		showTab('#form-webpage')
+	})
+
+	var tabWebsite = document.querySelector('#tab-website')
+	tabWebsite.addEventListener('click', function () {
+		showTab('#form-website')
+	})
+
 	setTimeout(function () {
 		handleData({
 			"polarity": [

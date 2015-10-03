@@ -40,8 +40,11 @@ h1, h2, h3 {
 	color: @black;
 }
 
-p {
+* {
 	font-family: 'Playfair Display', serif;
+}
+
+p {
 	margin-bottom: 10px;
 }
 
@@ -52,7 +55,7 @@ p {
 	margin: 0 auto;
 }
 
-h2 {
+h2, h3 {
 	margin: 30px 0 10px;
 }
 
@@ -73,11 +76,11 @@ a:hover {
 
 	background: @pink;
 
-	font-family: 'Cookie', cursive;
-	font-size: 2em;
-	font-style: italic;
-
 	a {
+		font-family: 'Cookie', cursive;
+		font-size: 2em;
+		font-style: italic;
+
 		text-decoration: none;
 
 		&:not(:hover) {
@@ -135,6 +138,33 @@ a:hover {
 		content: ' ';
 		display: block;
 		clear: both;
+	}
+}
+
+form {
+	input, textarea, button {
+		background: @white;
+
+		padding: 5px 10px;
+	}
+}
+
+.tab:not(#form-text) {
+	display: none;
+}
+
+#tabs-header {
+	h3 {
+		float: left;
+		cursor: pointer;
+		border: 1px solid @black;
+		padding: 10px;
+	}
+
+	&:after {
+		clear: both;
+		content: " ";
+		display: block;
 	}
 }
 
