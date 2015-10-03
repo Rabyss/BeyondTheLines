@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from extract import extract
-import sys
 import importlib
 import argparse
 from langdetect import detect
@@ -34,4 +33,5 @@ def main():
     return 0
 
 if __name__ == "__main__":
+    import sys
     sys.exit(main())
