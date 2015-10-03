@@ -76,6 +76,9 @@ function boxPlot(avg, deviation, min, max, parent, color) {
 	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width
 	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos
 
+	var boxPlot = document.createElement('div')
+	boxPlot.classList.add('boxPlot')
+
 	var box = document.createElement('div')
 	box.classList.add('box')
 	box.style.left =  boxLeftPos + 'px'
@@ -86,10 +89,10 @@ function boxPlot(avg, deviation, min, max, parent, color) {
 	avgDiv.classList.add('avg')
 	avgDiv.style.left =  avgPos + 'px'
 	avgDiv.style.background = darken(color)
-	console.log(darken(color))
 
-	div.appendChild(box)
-	div.appendChild(avgDiv)
+	div.appendChild(boxPlot)
+	boxPlot.appendChild(box)
+	boxPlot.appendChild(avgDiv)
 }
 
 function modality(avg, deviation, color) {
@@ -100,24 +103,45 @@ function wordPerSentence(avg, deviation, color) {
 	boxPlot(avg, deviation, 0, 100, '#word-per-sentence', color)
 }
 
-function moods(data, color)
-{
-	var data = google.visualization.arrayToDataTable([
-		['', ''],
-		['Indicative', data["indicative"]],
-		['Imperative', data["imperative"]],
-		['Conditonal', data["conditional"]],
-		['Subjunctive', data["subjunctive"]],
-	]);
-
+var moodsInitialized = false
+var material
+var previousData
+function moods(data, color) {
 	var options = {
-		colors: [color, darken(color)],
+		colors: predefinedColors,
 		hAxis: { maxValue: 100 },
 		backgroundColor: { fill:'transparent' }
-	};
+	}
 
-	var material = new google.visualization.BarChart(document.getElementById('mood'));
-	material.draw(data, options);
+	if (!moodsInitialized) {
+		previousData = [
+			['', ''],
+			['Indicative', data["indicative"]],
+			['Imperative', data["imperative"]],
+			['Conditonal', data["conditional"]],
+			['Subjunctive', data["subjunctive"]]
+		]
+
+		var dataTable = google.visualization.arrayToDataTable(previousData);
+
+		material = new google.visualization.BarChart(document.getElementById('mood'))
+		material.draw(dataTable, options)
+		moodsInitialized = true
+	} else {
+		var newData = []
+
+		console.log(previousData)
+
+		previousData[0].push('')
+		previousData[1].push(data["indicative"])
+		previousData[2].push(data["imperative"])
+		previousData[3].push(data["conditional"])
+		previousData[4].push(data["subjunctive"])
+
+		var dataTable = google.visualization.arrayToDataTable(previousData)
+
+		material.draw(dataTable, options)
+	}
 }
 
 function handleData(data) {
@@ -196,6 +220,87 @@ function run() {
 			"modality": [
 				0.6422299488705738,
 				0.3142989273647446
+			],
+			"moods": {
+				"conditional": 10,
+				"indicative": 37,
+				"subjunctive": 62
+			}
+		})
+		handleData({
+			"polarity": [
+				0.02293211129148629,
+				0.2174031579455767
+			],
+			"positivity": [
+				0.10833333333333334,
+				0.3061164310337067
+			],
+			"wordPerSentence": [
+				12.604166666666668,
+				4.501339746839157
+			],
+			"subjectivity": [
+				0.8293211129148629,
+				0.1174031579455767
+			],
+			"modality": [
+				0.2422299488705738,
+				0.2142989273647446
+			],
+			"moods": {
+				"conditional": 10,
+				"indicative": 37,
+				"subjunctive": 62
+			}
+		})
+		handleData({
+			"polarity": [
+				0.02293211129148629,
+				0.2174031579455767
+			],
+			"positivity": [
+				0.10833333333333334,
+				0.3061164310337067
+			],
+			"wordPerSentence": [
+				12.604166666666668,
+				4.501339746839157
+			],
+			"subjectivity": [
+				0.8293211129148629,
+				0.1174031579455767
+			],
+			"modality": [
+				0.2422299488705738,
+				0.2142989273647446
+			],
+			"moods": {
+				"conditional": 10,
+				"indicative": 37,
+				"subjunctive": 62
+			}
+		})
+		handleData({
+			"polarity": [
+				0.02293211129148629,
+				0.2174031579455767
+			],
+			"positivity": [
+				0.10833333333333334,
+				0.3061164310337067
+			],
+			"wordPerSentence": [
+				12.604166666666668,
+				4.501339746839157
+			],
+			"subjectivity": [
+				0.8293211129148629,
+				0.1174031579455767
+			],
+			"modality": [
+				0.2422299488705738,
+				0.2142989273647446
 			],
 			"moods": {
 				"conditional": 10,
