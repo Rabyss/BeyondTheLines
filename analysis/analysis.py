@@ -19,7 +19,7 @@ def analyze(s, language=None):
     # Detect language if not provided
     if language is None:
         language = detect(s)
-    if language not in ["en", "fr"]:
+    if language not in ["en", "fr", "nl"]:
         raise Exception("Language "+language+"not supported")
     # Load pattern
     pattern = importlib.import_module("pattern." + language)
