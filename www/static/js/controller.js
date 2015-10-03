@@ -37,16 +37,15 @@ function pattern2html(x, y) {
 	}
 }
 
-function wordPerSentence(avg, deviation) {
-	var max = 100;
-
-	var div = document.querySelector('#word-per-sentence')
+function boxPlot(avg, deviation, min, max, parent) {
+	var div = document.querySelector(parent)
 	var width = div.offsetWidth
 
-	var avgPos = (avg / max) * width;
-	var boxLeftPos = ((avg - deviation) / max) * width;
+	// var avgPos = (avg / max) * width;
+	var avgPos = ((avg - min) / (max - min)) * width;
+	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width;
 	console.log(avg, deviation, max, width, boxLeftPos)
-	var boxWidth = ((avg + deviation) / max) * width - boxLeftPos;
+	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos;
 	
 	var box = document.createElement('div')
 	box.classList.add('box')
@@ -61,9 +60,18 @@ function wordPerSentence(avg, deviation) {
 	div.appendChild(avgDiv)
 }
 
+function modality(avg, deviation) {
+	boxPlot(avg, deviation, -1, 1, '#modality')
+}
+
+function wordPerSentence(avg, deviation) {
+	boxPlot(avg, deviation, 0, 100, '#word-per-sentence')
+}
+
 function handleData(data) {
 	addPin(data.polarity[0], data.subjectivity[0])
 	wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1])
+	modality(data.modality[0], data.modality[1])
 }
 
 function run() {
