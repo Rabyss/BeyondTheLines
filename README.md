@@ -56,7 +56,7 @@ GET request to ```http://localhost:8000/api/webpage?surl=<source>```
 * example : ```http://localhost:8000/api/webpage?url=http://edition.cnn.com/2015/10/03/asia/afghanistan-doctors-without-borders-hospital/index.html```
 
 
-### Textt analysis ###
+### Text analysis ###
 
 POST request to ```http://localhost:8000/api/text``` with attribute `text` which is the text to analyze.
 
