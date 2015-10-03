@@ -27,6 +27,25 @@
 	border-right: @triangle-width/2 solid transparent;
 	border-top: @triangle-height solid @triangle-color;
 
+	.legend {
+		position: absolute;
+
+		&#legend-positive {
+			top: -@triangle-height - 30;
+			left: -@triangle-width/2;
+		}
+
+		&#legend-negative {
+			top: -@triangle-height - 30;
+			right: -@triangle-width/2;
+		}
+		
+		&#legend-objective {
+			top: 10px;
+			transform: translateX(-50%);
+		}
+	}
+
 	.pin {
 		position: absolute;
 		width: @pin-size;
