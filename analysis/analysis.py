@@ -8,6 +8,7 @@ import argparse
 from langdetect import detect
 import numpy as np
 from collections import Counter
+import json
 
 def stats(l):
     return np.mean(l), np.std(l)
@@ -30,7 +31,7 @@ def analyze(s, language=None):
     analysis["polarity"] = stats([s[0] for s in sentiments])
     analysis["subjectivity"] = stats([s[0] for s in sentiments])
     analysis["positivity"] = stats([int(pattern.positive(s)) for s in pt])
-    return analysis
+    return json.dumps(analysis)
 
 
 def analyze_url(url, language=None):
