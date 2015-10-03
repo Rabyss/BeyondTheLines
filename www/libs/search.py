@@ -3,26 +3,13 @@
 
 import requests
 import string
-from abc import ABCMeta, abstractmethod
 
 
-class SearchEngine:
-    __metaclass__ = ABCMeta
-
-    def __init__(self):
-        return
-
-    @abstractmethod
-    def search(self, query):
-        raise NotImplemented
-
-
-class BingSearchEngine(SearchEngine):
+class BingSearchEngine:
     bing_api = "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Composite?"
 
     def __init__(self, key):
         self.key = key
-        super(BingSearchEngine, self).__init__()
 
     @staticmethod
     def encode(request):
@@ -43,30 +30,35 @@ class BingSearchEngine(SearchEngine):
 
     def search_with_params(self, query, params):
         request = 'Sources="web"'
-        request += '&Query="' + str(query) + '"'
+        request += '&Query="' + query + '"'
         for key, value in params.iteritems():
             request += '&' + key + '=' + str(value)
         request = self.bing_api + self.encode(request)
         return requests.get(request, auth=(self.key, self.key))
 
+    @staticmethod
+    def extract_urls_from_result(result, results_per_query):
+        web_results = result["d"]["results"][0]["Web"]
+        urls = [wr["Url"] for wr in web_results]
+        if len(urls) > results_per_query:
+            urls = urls[:results_per_query]
+        return urls
+
 
 def search_from_sources(sources, query, results_per_query, engine):
+    params = {"$format": "json", "$top": results_per_query, "$skip": 0}
     queries = []
     for source in sources:
         if source == "web":
-            queries.append(query)
+            queries.append((source, query))
         else:
-            queries.append("site:" + source + " " + query)
+            queries.append((source, "site:" + source + " " + query))
 
-    return [extract_urls_from_result(engine.search(q).json(), results_per_query) for q in queries]
+    results = {}
+    for (s, q) in queries:
+        results[s] = engine.extract_urls_from_result(engine.search_with_params(q, params).json(), results_per_query)
 
-
-def extract_urls_from_result(result, results_per_query):
-    web_results = result["d"]["results"][0]["Web"]
-    urls = [wr["Url"] for wr in web_results]
-    if len(urls) > results_per_query:
-        urls = urls[:results_per_query]
-    return urls
+    return results
 
 
 def main():
