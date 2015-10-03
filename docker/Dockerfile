@@ -20,4 +20,8 @@ RUN pip install langdetect
 # Django
 RUN apt-get install -y python-django
 
-# VOLUME ["/app"]
+VOLUME ["/app"]
+
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/python app/manage.py runserver"]
