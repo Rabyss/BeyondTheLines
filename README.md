@@ -3,17 +3,9 @@ Our awesome analysis project
 
 ## Running the app ##
 
-Run:
+Run: ```python2 www/manage.py runserver```
 
-```
-python2 www/manage.py runserver
-```
-
-Then, access:
-
-```
-http://localhost:8000
-```
+Then, access: http://localhost:8000
 
 ## Features ##
 
