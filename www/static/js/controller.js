@@ -44,8 +44,10 @@ function boxPlot(avg, deviation, min, max, parent) {
 	// var avgPos = (avg / max) * width;
 	var avgPos = ((avg - min) / (max - min)) * width;
 	var boxLeftPos = ((avg - deviation - min) / (max - min)) * width;
-	console.log(avg, deviation, max, width, boxLeftPos)
 	var boxWidth = ((avg + deviation - min) / (max - min)) * width - boxLeftPos;
+
+
+	console.log(width)
 	
 	var box = document.createElement('div')
 	box.classList.add('box')
@@ -75,31 +77,33 @@ function handleData(data) {
 }
 
 function run() {
-	handleData({
-		"polarity": [
-			0.07293211129148629,
-			0.2174031579455767
-		],
-		"positivity": [
-			0.20833333333333334,
-			0.4061164310337067
-		],
-		"wordPerSentence": [
-			28.604166666666668,
-			11.501339746839157
-		],
-		"subjectivity": [
-			0.07293211129148629,
-			0.2174031579455767
-		],
-		"modality": [
-			0.6422299488705738,
-			0.3142989273647446
-		],
-		"moods": {
-			"conditional": 10,
-			"indicative": 37,
-			"subjunctive": 1
-		}
-	})
+	setTimeout(function () {
+		handleData({
+			"polarity": [
+				0.07293211129148629,
+				0.2174031579455767
+			],
+			"positivity": [
+				0.20833333333333334,
+				0.4061164310337067
+			],
+			"wordPerSentence": [
+				28.604166666666668,
+				11.501339746839157
+			],
+			"subjectivity": [
+				0.07293211129148629,
+				0.2174031579455767
+			],
+			"modality": [
+				0.6422299488705738,
+				0.3142989273647446
+			],
+			"moods": {
+				"conditional": 10,
+				"indicative": 37,
+				"subjunctive": 1
+			}
+		})
+	}, 100)
 }
