@@ -1,9 +1,14 @@
 "use strict"
 
-if (document.readyState !== 'loading') {
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(checkLoaded);
+
+function checkLoaded() {
+    if (document.readyState !== 'loading') {
 	run()
-} else {
+    } else {
 	document.addEventListener('DOMContentLoaded', run)
+    }
 }
 
 function showTab(tabName) {
@@ -84,10 +89,29 @@ function wordPerSentence(avg, deviation) {
 	boxPlot(avg, deviation, 0, 100, '#word-per-sentence')
 }
 
+function moods(data)
+{
+    var data = google.visualization.arrayToDataTable([
+        ['', ''],
+        ['Indicative', data["indicative"]],
+        ['Imperative', data["imperative"]],
+        ['Conditonal', data["conditional"]],
+        ['Subjunctive', data["subjunctive"]],
+    ]);
+    var options = {
+	colors: ['#FE2A53', '#ffab91'],
+	hAxis: { maxValue: 100 }
+    };
+
+    var material = new google.visualization.BarChart(document.getElementById('mood'));
+    material.draw(data, options);
+}
+
 function handleData(data) {
-	addPin(data.polarity[0], data.subjectivity[0])
-	wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1])
-	modality(data.modality[0], data.modality[1])
+    addPin(data.polarity[0], data.subjectivity[0])
+    wordPerSentence(data.wordPerSentence[0], data.wordPerSentence[1])
+    modality(data.modality[0], data.modality[1])
+    moods(data.moods)
 }
 
 function run() {
@@ -137,7 +161,7 @@ function run() {
 			"moods": {
 				"conditional": 10,
 				"indicative": 37,
-				"subjunctive": 1
+				"subjunctive": 62
 			}
 		})
 	}, 100)
