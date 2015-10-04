@@ -21,8 +21,8 @@ function fetchUrl(url, label) {
 	    .then(function(response) {
 		return response.json()
   	    }).then(function(json) {
-		handleData(json)
 		addWebsiteLegend(label, getCurrentColor())
+		handleData(json)
 	    })
     }
 }
@@ -194,7 +194,7 @@ var predefinedColors = [
 var lastUsedPredefinedColors = 0
 
 function getCurrentColor() {
-	return predefinedColors[lastUsedPredefinedColors - 1]
+	return predefinedColors[lastUsedPredefinedColors]
 }
 
 function getNewColor() {
@@ -203,7 +203,7 @@ function getNewColor() {
 	color = predefinedColors[lastUsedPredefinedColors]
 	lastUsedPredefinedColors++
 	if (lastUsedPredefinedColors >= predefinedColors.length) {
-		lastUsedPredefinedColors = 1
+		lastUsedPredefinedColors = 0
 	}
 
 	return color
