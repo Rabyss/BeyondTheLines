@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script src="/static/js/less.min.js"></script>
 		<script src="/static/js/fetch.min.js"></script>
+		<script src="/static/js/spinner.js"></script>
 		<script src="/static/js/controller.js"></script>
 		
 		<link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
@@ -70,9 +71,7 @@
 			<div id="error">
 				An error occured : the text may be empty, in a non supported language or the request is malformed.
 			</div>
-			<div id="spinner">
-				Processing...
-			</div>
+			<canvas id="spinner"></canvas>
 
 			<h2>Data Set</h2>
 			<div id="data-set">

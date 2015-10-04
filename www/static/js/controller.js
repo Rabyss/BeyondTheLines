@@ -156,8 +156,8 @@ function darken(color) {
 }
 
 var predefinedColors = [
-	'#bcf0b6',
 	'#f0b6c4',
+	'#bcf0b6',
 	'#d7b6f0',
 	'#fbeb9e'
 ]
@@ -224,6 +224,8 @@ function addWebpageLegend(inputUrl, inputTopic, inputNumber, color) {
 function run() {
 	var spinner = document.querySelector("#spinner")
 	var error = document.querySelector("#error")
+
+startSpinner()
 
 	var tabText = document.querySelector('#tab-text')
 	tabText.addEventListener('click', function () {
