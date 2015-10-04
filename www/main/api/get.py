@@ -57,21 +57,25 @@ def website_analysis(topic, quantity, url):
             pass
 
     accumulator = {}
-
+    accumulator["moods"]={"indicative":0,"imperative":0,"conditional":0,"subjunctive":0}
     for analysis in results:
         for key in analysis.keys():
             if key not in accumulator:
                 accumulator[key] = analysis[key]
             elif key != "moods":
                 accumulator[key] = [sum(x) for x in zip(accumulator[key], analysis[key])]
-            else:
-                accumulator[key].update(analysis[key].keys())
+        for k in accumulator["moods"].keys():
+            if k in analysis["moods"].keys():
+                accumulator["moods"][k]=accumulator["moods"][k]+analysis["moods"][k]
+            #accumulator[key].update(analysis[key].keys())
 
     results_number = len(results)
 
     for key in accumulator.keys():
         if key != "moods":
             accumulator[key] = [x/results_number for x in accumulator[key]]
+    for k in accumulator["moods"].keys():
+        accumulator["moods"][k]=accumulator["moods"][k]/results_number
 
     return HttpResponse(json.dumps(accumulator), content_type="application/json")
 

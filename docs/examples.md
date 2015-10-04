@@ -35,6 +35,10 @@ Test the websites of political parties on the following topics.
 
 (niveau fédéral en 2015)
 
+### In the UK
+
+* Conservatives
+
 # Newspapers
 
 Analyze the same topics for the following newspapers:

@@ -29,10 +29,10 @@ def analyze(s, language=None):
     analysis["wordPerSentence"] = stats([len(s.words) for s in pt])
     #Moods
     moods = Counter([pattern.mood(s) for s in pt])
-    #tot=sum([v for k,v in moods.iteritems()])
-    #analysis["moods"] = {}
-    #for k in moods.keys():
-    #    analysis["moods"][k] = round(float(moods[k])/tot*100)
+    tot=sum([v for k,v in moods.iteritems()])
+    analysis["moods"] = {}
+    for k in moods.keys():
+       analysis["moods"][k] = round(float(moods[k])/tot*100)
     #
     analysis["modality"] = stats([pattern.modality(s) for s in pt])
     sentiments = [pattern.sentiment(s) for s in pt]
