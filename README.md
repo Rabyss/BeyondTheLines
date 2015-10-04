@@ -1,6 +1,10 @@
 # HackZurich2015
 Our awesome analysis project
 
+## Demo ##
+
+http://daroumachin.cloudapp.net/
+
 ## Running the app ##
 
 Run: ```python2 www/manage.py runserver```
