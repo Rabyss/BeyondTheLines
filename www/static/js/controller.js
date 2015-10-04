@@ -179,7 +179,12 @@ var predefinedColors = [
 	'#f0b6c4',
 	'#bcf0b6',
 	'#d7b6f0',
-	'#fbeb9e'
+	'#fbeb9e',
+	'#f76788',
+	'#b267f7',
+	'#678df7',
+	'#67f772',
+	'#d4f767'
 ]
 
 var lastUsedPredefinedColors = 0
