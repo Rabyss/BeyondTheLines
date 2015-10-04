@@ -77,7 +77,8 @@ def website_analysis(topic, quantity, url):
         if key != "moods":
             accumulator[key] = [x/results_number for x in accumulator[key]]
     for k in accumulator["moods"].keys():
-        accumulator["moods"][k]=accumulator["moods"][k]/results_number
+        if results_number>0:
+            accumulator["moods"][k]=accumulator["moods"][k]/results_number
 
     return HttpResponse(json.dumps(accumulator), content_type="application/json")
 
