@@ -225,8 +225,6 @@ function run() {
 	var spinner = document.querySelector("#spinner")
 	var error = document.querySelector("#error")
 
-startSpinner()
-
 	var tabText = document.querySelector('#tab-text')
 	tabText.addEventListener('click', function () {
 		hide(error)
@@ -256,11 +254,12 @@ startSpinner()
 		event.preventDefault()
 		hide(error)
 		show(spinner)
+		startSpinner()
 		var form = document.querySelector("#form-text")
 		
 		var textInput = document.querySelector("#form-text textarea").value
 		addTextLegend(textInput, getCurrentColor())
-
+		setTimeout(function(){
 		fetch('/api/text', {
 			method: 'post',
 			body: new FormData(form)
@@ -277,7 +276,7 @@ startSpinner()
 			}
 		}).catch(function(ex) {
 			console.log('parsing failed', ex)
-		})
+		})}, 2000)
 	})
 
 	var buttonPage = document.querySelector("#form-webpage button")
@@ -285,6 +284,7 @@ startSpinner()
 		event.preventDefault()
 		hide(error)
 		show(spinner)
+		startSpinner()
 		var inputUrl = document.querySelector("#form-webpage #urlpage").value
 
 		addWebsiteLegend(inputUrl, getCurrentColor())
@@ -310,6 +310,7 @@ startSpinner()
 		event.preventDefault()
 		hide(error)
 		show(spinner)
+		startSpinner()
 		var inputUrl = document.querySelector("#form-website #urlsite").value
 		var inputTopic = document.querySelector("#form-website #topic").value
 		var inputNumber = document.querySelector("#form-website #numberResults").value
