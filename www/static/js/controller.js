@@ -3,6 +3,25 @@
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(checkLoaded);
 
+//parties={"conservatives","labour","snp","libdems","dup"}
+var parties=["conservatives"]
+var newspapers=["guardian","dailytelegraph","times","independent"]
+//examples=[{"folder":"political-parties","files":newspapers}]
+
+function loadExample(folder,files)
+{
+    for (var i = 0; i < files.length; i++) {
+	var url="/static/examples/"+folder+"/"+files[i]+".json"
+	console.log(url)
+	fetch(url)
+	    .then(function(response) {
+		return response.json()
+  	    }).then(function(json) {
+		handleData(json)
+	    })
+    }
+}
+
 function checkLoaded() {
 	if (document.readyState !== 'loading') {
 	run()
@@ -333,8 +352,10 @@ function run() {
 		}).catch(function(ex) {
 			console.log('parsing failed', ex)
 		})
-	})
+		    })
 
+    
+    loadExample("parties-immigration",parties)
 	// setTimeout(function () {
 	// 	handleData({
 	// 		"polarity": [
