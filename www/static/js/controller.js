@@ -195,11 +195,11 @@ function getCurrentColor() {
 
 function getNewColor() {
 	var color = '#f0b6c4'
+	// TODO get a light random color (https://github.com/davidmerfield/randomColor)
+	color = predefinedColors[lastUsedPredefinedColors]
+	lastUsedPredefinedColors++
 	if (lastUsedPredefinedColors >= predefinedColors.length) {
-		// TODO get a light random color (https://github.com/davidmerfield/randomColor)
-	} else {
-		color = predefinedColors[lastUsedPredefinedColors]
-		lastUsedPredefinedColors++
+		lastUsedPredefinedColors = 0
 	}
 
 	return color
