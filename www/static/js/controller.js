@@ -4,7 +4,7 @@ google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(checkLoaded);
 
 //parties={"conservatives","labour","snp","libdems","dup"}
-var parties=["conservatives"]
+var parties=["conservatives","labour","snp"]
 var newspapers=["guardian","dailytelegraph","times","independent"]
 //examples=[{"folder":"political-parties","files":newspapers}]
 
