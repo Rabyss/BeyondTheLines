@@ -18,6 +18,7 @@ function loadExample(folder,files)
 		return response.json()
   	    }).then(function(json) {
 		handleData(json)
+		addWebsiteLegend(files[i], getCurrentColor())
 	    })
     }
 }
@@ -354,8 +355,10 @@ function run() {
 		})
 		    })
 
-    
-    loadExample("parties-immigration",parties)
+    document.querySelector("#example1").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("parties-immigration",parties)
+	})
 	// setTimeout(function () {
 	// 	handleData({
 	// 		"polarity": [
