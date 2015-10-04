@@ -83,8 +83,8 @@ function pattern2html(x, y) {
 	var h = triangle.offsetHeight
 
 	return {
-		x: (x + 1) / 2 * w,
-		y: (1 - y) * h
+	    x: (x + 1) / 2 * w,
+	    y: (1-y) * h
 	}
 }
 
