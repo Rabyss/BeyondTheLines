@@ -194,7 +194,7 @@ var predefinedColors = [
 var lastUsedPredefinedColors = 0
 
 function getCurrentColor() {
-	return predefinedColors[lastUsedPredefinedColors]
+	return predefinedColors[lastUsedPredefinedColors - 1]
 }
 
 function getNewColor() {
