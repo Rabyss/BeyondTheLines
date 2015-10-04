@@ -37,7 +37,7 @@ def analyze(s, language=None):
     analysis["modality"] = stats([pattern.modality(s) for s in pt])
     sentiments = [pattern.sentiment(s) for s in pt]
     analysis["polarity"] = stats([s[0] for s in sentiments])
-    analysis["subjectivity"] = stats([s[0] for s in sentiments])
+    analysis["subjectivity"] = stats([1-s[1] for s in sentiments])
     analysis["positivity"] = stats([int(pattern.positive(s)) for s in pt])
     return analysis
 

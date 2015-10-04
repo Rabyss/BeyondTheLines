@@ -46,6 +46,8 @@ def website_analysis(topic, quantity, url):
     engine = search.BingSearchEngine(os.environ["BING_API_KEY"])
     urls = search.search_from_sources(url, topic, quantity, engine)
 
+    print urls
+
     results = []
     for url in urls:
         try:

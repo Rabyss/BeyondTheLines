@@ -35,9 +35,13 @@ Test the websites of political parties on the following topics.
 
 (niveau fédéral en 2015)
 
-### In the UK
+### In the United Kingdom
 
-* Conservatives
+* Conservative and Unionist Party - http://www.conservatives.com/
+* Labour Party - http://www.labour.org.uk/
+* Scottish National Party - http://www.snp.org/
+* Liberal Democrats - http://libdems.org.uk/
+* Democratic Unionist Party - http://www.mydup.com/
 
 # Newspapers
 
