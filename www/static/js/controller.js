@@ -203,7 +203,7 @@ function getNewColor() {
 	color = predefinedColors[lastUsedPredefinedColors]
 	lastUsedPredefinedColors++
 	if (lastUsedPredefinedColors >= predefinedColors.length) {
-		lastUsedPredefinedColors = 0
+		lastUsedPredefinedColors = 1
 	}
 
 	return color
