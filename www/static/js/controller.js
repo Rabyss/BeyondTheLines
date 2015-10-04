@@ -4,8 +4,8 @@ google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(checkLoaded);
 
 //parties={"conservatives","labour","snp","libdems","dup"}
-var parties=["conservatives","labour","snp"]
-var newspapers=["guardian","dailytelegraph","times","independent"]
+var parties=["conservatives","labour","snp", "liberaldemocrats"]
+var newspapers=["theguardian","dailytelegraph","thetimes","theindependent"]
 //examples=[{"folder":"political-parties","files":newspapers}]
 
 function loadExample(folder,files)
@@ -13,12 +13,16 @@ function loadExample(folder,files)
     for (var i = 0; i < files.length; i++) {
 	var url="/static/examples/"+folder+"/"+files[i]+".json"
 	console.log(url)
+	fetchUrl(url, files[i])
+}
+
+function fetchUrl(url, label) {
 	fetch(url)
 	    .then(function(response) {
 		return response.json()
   	    }).then(function(json) {
 		handleData(json)
-		addWebsiteLegend(files[i], getCurrentColor())
+		addWebsiteLegend(label, getCurrentColor())
 	    })
     }
 }
@@ -363,6 +367,30 @@ function run() {
     document.querySelector("#example1").addEventListener('click', function (event) {
 		event.preventDefault()
 		loadExample("parties-immigration",parties)
+	})
+	document.querySelector("#example2").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("parties-europe",parties)
+	})
+	document.querySelector("#example3").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("parties-family",parties)
+	})
+	document.querySelector("#example4").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("newspapers-immigration",newspapers)
+	})
+	document.querySelector("#example5").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("newspapers-europe",newspapers)
+	})
+	document.querySelector("#example6").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("newspapers-ecology",newspapers)
+	})
+	document.querySelector("#example7").addEventListener('click', function (event) {
+		event.preventDefault()
+		loadExample("newspapers-family",newspapers)
 	})
 	// setTimeout(function () {
 	// 	handleData({
