@@ -29,7 +29,7 @@ VOLUME ["/app"]
 EXPOSE 8080
 
 # Create database
-RUN /usr/bin/python /app/manage.py makemigrations
-RUN /usr/bin/python /app/manage.py migrate
+#RUN /usr/bin/python /app/manage.py makemigrations
+#RUN /usr/bin/python /app/manage.py migrate
 
 ENTRYPOINT ["/usr/bin/supervisord"]
